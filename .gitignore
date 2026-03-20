@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+whiteboard/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug / temp files
+*.png
+debug_*
+processed_*
+
+# IDE
+.vscode/
+.idea/

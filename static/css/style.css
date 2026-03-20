@@ -1,0 +1,295 @@
+/* Gradient background */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Comic Sans MS", Arial;
+    background: linear-gradient(to bottom, #E6D1FF, #9D85F9);
+}
+
+/* --- TOP BAR --- */
+#top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+}
+
+#title-section {
+    position: absolute;
+    left: 20px;
+}
+
+#logo-img {
+    width: 300px;      /* increase this */
+    height: auto;      /* keeps aspect ratio */
+    margin-top: 30px;
+}
+
+#tagline {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 260px;
+    position: relative;
+    top: 15px;
+    /* margin-top: 20px; */
+}
+
+#text-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* canvas still receives drawing events */
+    z-index: 20;
+}
+
+.text-box {
+    position: absolute;
+    min-width: 120px;
+    min-height: 30px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px dashed #7A5CF4;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: move;
+    pointer-events: auto; /* allow typing & dragging */
+}
+
+/* --- MAIN LAYOUT --- */
+#layout {
+    display: flex;
+    height: calc(100vh - 110px);
+    margin-top: 10px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.text-box:empty::before {
+    content: "Type here";
+    color: #999;
+    pointer-events: none;
+}
+
+/* --- LEFT SIDEBAR --- */
+#left-panel {
+    width: 120px;
+    height: 88%;
+    background: #ECDFFF;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+/* Each row has 2 buttons */
+.tool-row {
+    display: flex;
+    justify-content: flex-start;  /* align buttons to start */
+    gap: 20px;                    /* horizontal space between buttons */
+    margin-bottom: 15px;
+}
+
+/* Empty button blocks (you will add icons later) */
+.tool-btn {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+
+}
+
+/* Highlight on hover */
+.tool-btn:hover {
+    filter: brightness(0.9);
+}
+
+#penBtn {
+    background-image: url('../icons/Pencil.png');
+    background-size: 70%;
+}
+
+#eraserBtn {
+    background-image: url('../icons/Eraser.png');
+    background-size: 70%;
+    background-position: center 15px;
+}
+
+#lineBtn {
+    background-image: url('../icons/Line\ 4.png');
+    background-size: 60%;
+}
+
+#rectBtn {
+    background-image: url('../icons/Rectangle\ 15.png');
+}
+
+#circleBtn {
+    background-image: url('../icons/Ellipse\ 1.png');
+}
+
+#colorPickerBtn {
+    background-image: url('../icons/Color-picker.png');
+}
+
+#textBtn {
+    background-image: url('../icons/T.png');
+    background-size: 40%;
+}
+
+#deleteBtn {
+    background-image: url('../icons/Delete_icon.png');
+    background-size: 45%;
+}
+
+.text-box.selected-text {
+    outline: 2px dashed red;
+}
+
+#undoBtn {
+    background-image: url('../icons/Undo.png');
+}
+
+#redoBtn {
+    background-image: url('../icons/Redo.png');
+}
+
+#clearBtn {
+    background-image: url('../icons/Clear.png');
+}
+
+#saveBtn {
+    background-image: url('../icons/Save.png');
+}
+
+#handwritingBtn {
+    background-image: url('../icons/Hand-Writing.png');
+    background-size: 70%;
+}
+
+#camBtn {
+    background-image: url('../icons/Camera.png');
+}
+
+#handCam,
+#handOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#handCam {
+    transform: scaleX(-1);
+}
+
+#handOverlay {
+    pointer-events: none;
+    z-index: 11;
+}
+
+#board {
+    position: relative;
+    z-index: 1;
+}
+
+#cursorWB {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    pointer-events: none;
+    z-index: 5;
+}
+
+#cam-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 220px;
+    height: 165px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    overflow: hidden;
+
+    display: none;      /* 🔥 HIDDEN BY DEFAULT */
+    z-index: 10;
+}
+
+#undoBtn, #redoBtn {
+    margin-top: 25px;  /* move buttons down */
+}
+
+/* Sliders */
+.slider-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+.slider {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.slider-container {
+    margin-top: 30px;  /* moves both sliders down together */
+}
+
+/* --- WHITEBOARD AREA --- */
+#whiteboard-wrapper {
+    flex: 1;
+    height: 100%;
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ONLY the main board is white */
+#board {
+    background: white;
+}
+
+/* Pencil cursor */
+.cursor-pen {
+    cursor: url("../icons/Pencil-cursor.png") 2 5, auto;
+}
+
+/* Eraser cursor (optional) */
+.cursor-eraser {
+    cursor: url("../icons/Eraser-cursor.png") 10 10, auto;
+}
+
+/* Default */
+.cursor-default {
+    cursor: crosshair;
+}
+
+.active-tool {
+    outline: 3px solid #7A5CF4;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Whiteboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div id="top-bar">
+        <div id="title-section">
+            <img id="logo-img" src="{{ url_for('static', filename='icons/Logo.png') }}">
+        </div>
+
+        <div id="tagline">
+            “An AI-enhanced teaching whiteboard for drawing, writing, gesture control, and generating clean digital
+            notes.”
+        </div>
+    </div>
+
+    <div id="layout">
+
+        <!-- LEFT TOOLBAR -->
+        <div id="left-panel">
+
+            <!-- BUTTON ROWS (ICONS WILL BE ADDED BY YOU) -->
+            <div class="tool-row">
+                <button class="tool-btn" id="penBtn" onclick="setTool('pen')"></button>
+                <button class="tool-btn" id="eraserBtn" onclick="setTool('eraser')"></button>
+            </div>
+
+            <div class="tool-row">
+                <button class="tool-btn" id="lineBtn" onclick="setTool('line')"></button>
+                <button class="tool-btn" id="rectBtn" onclick="setTool('rect')"></button>
+            </div>
+
+            <div class="tool-row">
+                <button class="tool-btn" id="circleBtn" onclick="setTool('circle')"></button>
+                <button class="tool-btn" id="colorPickerBtn" onclick="openColorPicker()"></button>
+
+                <input type="color" id="colorPicker" value="#000000" onchange="changeColor(this.value)"
+                    style="display:none;">
+
+            </div>
+
+            <div class="tool-row">
+                <button class="tool-btn" id="textBtn" onclick="addText()"></button>
+                <button class="tool-btn" id="deleteBtn"></button>
+            </div>
+
+            <!-- SLIDERS -->
+            <div class="slider-container">
+                <label class="slider-label">Pen Size</label>
+                <input type="range" min="1" max="40" value="5" onchange="changePenSize(this.value)" class="slider">
+
+                <label class="slider-label">Eraser Size</label>
+                <input type="range" min="10" max="80" value="25" onchange="changeEraserSize(this.value)" class="slider">
+            </div>
+
+            <!-- Undo / Redo -->
+            <div class="tool-row">
+                <button class="tool-btn" id="undoBtn" onclick="undo()"></button>
+                <button class="tool-btn" id="redoBtn" onclick="redo()"></button>
+            </div>
+
+            <!-- Clear / Save -->
+            <div class="tool-row">
+                <button class="tool-btn" id="clearBtn" onclick="clearBoard()"></button>
+                <button class="tool-btn" id="saveBtn" onclick="saveBoard()"></button>
+            </div>
+
+            <div class="tool-row">
+                <button class="tool-btn" id="handwritingBtn" onclick="recognizeHandwriting()"></button>
+                <button class="tool-btn" id="camBtn" onclick="toggleCamera()"></button>
+            </div>
+
+        </div>
+
+        <!-- RIGHT WHITEBOARD SECTION -->
+        <div id="whiteboard-wrapper">
+            <div id="text-container"></div>
+            <canvas id="board"></canvas>
+            <canvas id="cursorWB"></canvas>
+            <div id="cam-container">
+                <video id="handCam" autoplay muted playsinline></video>
+                <canvas id="handOverlay"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+    <script src="{{ url_for('static', filename='js/whiteboard.js') }}"></script>
+</body>
+
+</html>
