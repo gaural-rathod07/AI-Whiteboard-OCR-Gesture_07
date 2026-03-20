@@ -8,7 +8,7 @@ import re
 app = Flask(__name__)
 
 # Set tesseract path (Windows)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Gaural\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"<YOUR_TESSERACT_PATH>"
 
 
 @app.route("/")
