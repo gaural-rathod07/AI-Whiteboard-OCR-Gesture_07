@@ -1,4 +1,4 @@
-# 🧠 AI Whiteboard with OCR & Gesture Control
+# AI Whiteboard with OCR & Gesture Control
 
 An interactive AI-powered whiteboard that allows users to draw, write, use hand gestures, and convert handwritten content into clean digital text using OCR.
 
@@ -87,11 +87,11 @@ Gaural Rathod
 
 ## Screenshots
 
-## Draw using cursor
+### Draw using cursor
 <img width="1918" height="903" alt="1" src="https://github.com/user-attachments/assets/d21a9328-c96d-4e1c-a6cc-52b71d48425c" />
 
-## Convert to Text (OCR)
+### Convert to Text (OCR)
 <img width="1918" height="910" alt="2" src="https://github.com/user-attachments/assets/9755b25e-81b4-4a04-b025-92e0f9ade769" />
 
-## Draw using Hand Gestures
+### Draw using Hand Gestures
 <img width="1918" height="912" alt="3" src="https://github.com/user-attachments/assets/a3ed12b3-86f9-4770-b991-453854cea56a" />
